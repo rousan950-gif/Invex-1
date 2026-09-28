@@ -55,8 +55,11 @@ const usuarios = [];
 // frontend (usuario y contraseña) y los almacena en el arreglo
 // "usuarios" para que luego puedan usarse en el login.
 app.post("/api/register", (req, res) => {
-  // Extraemos los campos enviados en el cuerpo de la petición.
-  const { usuario, contrasena } = req.body;
+  // Aceptamos ambos nombres de campo para conectar con el frontend actual
+  // y con la API del backend. El frontend usa correo/password, mientras que
+  // la lógica del servidor usa usuario/contrasena.
+  const usuario = req.body.usuario ?? req.body.correo ?? req.body.email;
+  const contrasena = req.body.contrasena ?? req.body.password;
 
   // Validación básica: si falta algún campo, respondemos con error.
   if (!usuario || !contrasena) {
@@ -91,7 +94,8 @@ app.post("/api/register", (req, res) => {
 //   - Éxito  -> 200 OK  { "mensaje": "Autenticación satisfactoria" }
 //   - Fallo  -> 401 Unauthorized { "error": "Error en la autenticación" }
 app.post("/api/login", (req, res) => {
-  const { usuario, contrasena } = req.body;
+  const usuario = req.body.usuario ?? req.body.correo ?? req.body.email;
+  const contrasena = req.body.contrasena ?? req.body.password;
 
   // Buscamos un usuario cuyo usuario y contraseña coincidan
   // exactamente con los datos recibidos.
