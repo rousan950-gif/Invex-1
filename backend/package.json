@@ -1,9 +1,13 @@
 {
-  "name": "invex-backend",
+  "name": "backend-login-registro",
   "version": "1.0.0",
-  "description": "Backend del sistema InvEx",
+  "description": "API REST para el caso Login y Registro - GA7-220501096-AA5-EV01 (Integrante 1 - Backend Developer)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
   }
 }
